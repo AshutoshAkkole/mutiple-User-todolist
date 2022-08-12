@@ -1,0 +1,100 @@
+body {
+  margin: 0px;
+  font-family: "Montserrat", sans-serif;
+  background-color: #E4E9FD
+}
+
+.circle-img {
+  border-radius: 50%;
+  border: 2px solid whitesmoke;
+  width: 50px;
+  height: 50px;
+}
+
+nav {
+  padding: 5px;
+  display: flex;
+  background-color: yellowgreen;
+  justify-content: space-between;
+  box-shadow: 0 0 10px 0 black;
+}
+
+ul li {
+  padding-left: 3rem;
+  padding-top: 0.5rem;
+  list-style: none;
+
+}
+
+ul {
+  display: flex;
+  margin-right: 13rem;
+}
+
+/* //////////////////// card /////////////////////// */
+
+.card{
+  margin: 1rem;
+  padding: 4px;
+  width: 22%;
+  background-color: #eee;
+  border-radius: 7px;
+  box-shadow: 5px 5px 15px -5px rgb(0 0 0 / 30%)
+}
+/* /////////////////////// task //////////////////// */
+.task{
+  display: flex;
+  width: 100%;
+  /* background-color: #eee; */
+  /* padding-right: 10px; */
+  border-bottom: 1px solid;
+}
+
+.checkbox
+{
+  margin-left: 13px;
+}
+
+.taskdata
+{
+  margin-left: 10px;
+  word-wrap: break-word;
+  word-break: break-all
+}
+
+.taskcheck{
+  text-decoration: line-through;
+}
+
+/* ////////////////////// add /////////////////// */
+
+.add{
+  display: flex;
+  padding-top: 3px;
+  width: 100%;
+  margin:0;
+  /* background-color: #eee; */
+  text-align: center;
+  /* padding-right: 10px; */
+}
+.add input
+{
+  text-align: center;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  font-weight: 200;
+  width: 80%
+}
+
+.add button{
+    min-height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border-color: transparent;
+    background-color: #A683E3;
+    color: #fff;
+    font-size: 30px;
+    padding-bottom: 6px;
+    border-width: 0;
+}
