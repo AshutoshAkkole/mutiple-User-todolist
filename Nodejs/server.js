@@ -17,7 +17,7 @@ app.use(cors({
     credentials:true,
 }))
 app.use(express.json());
-// app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({extended:true}));
 app.use(session({
     secret:process.env.secret,
     resave:false,
@@ -35,15 +35,16 @@ app.use(passport.session());
 //     console.log("\n",req.user)
 // })
 
-passport.use(db.collection.createStrategy());
+passport.use(db.userCollection.createStrategy());
 
-passport.serializeUser(db.collection.serializeUser());
-passport.deserializeUser(db.collection.deserializeUser());
+passport.serializeUser(db.userCollection.serializeUser());
+passport.deserializeUser(db.userCollection.deserializeUser());
 
 
 app.get("/",(req,res)=>{
     if(req.isAuthenticated())
     {
+        console.log(req.user)
         console.log("sent 1")
         res.send(true);
     }
@@ -53,11 +54,55 @@ app.get("/",(req,res)=>{
     }
 })
 
+// app.get("/getcards",(req,res)=>{
+
+
+
+// })
+
+app.post("/creatCard",(req,res)=>{
+    if(req.isAuthenticated())
+    {
+        const card = new db.cardCollection({
+            title:req.body.title,
+            WhoCreated:req.user.username,
+            task:null
+        })
+
+        card.save(function(err,data)
+        {
+            if(err)
+            {
+                console.log("error in saving\n",err)
+            }
+            else{
+                const cardId = data.id;
+                const userShareArray=req.body.userShare.split(" ");
+                userShareArray.push(req.user.username);
+
+                userShareArray.forEach(function(user){
+                    db.userCollection.updateOne({username:user},{$push:{"cardId":cardId}},function(err){
+                        if(err)
+                        {
+                            console.log("error in sharing to user\nuser:",user,"\nerror:",err);
+                        }
+                    })
+                })
+
+                res.send("done");
+            }
+        })
+    }
+    else{
+        res.send(false);
+    }
+})
+
 
 
 app.post("/register", (req, response) => {
-    console.log(req.body)
-    db.collection.register({username:req.body.username},req.body.password,function(err,res){
+    // console.log(req.body)
+    db.userCollection.register({username:req.body.username},req.body.password,function(err,res){
         if(err)
         {
             console.log("some error cannot register\n",err);
@@ -86,7 +131,8 @@ app.get("/logout",(req,res)=>{
 
 
 app.post("/",(req,res)=>{
-    const user = new db.collection({
+    
+    const user = new db.userCollection({
         username:req.body.username,
         password:req.body.password
     })
@@ -96,9 +142,9 @@ app.post("/",(req,res)=>{
         {
             console.log("Error in Authentication\n",err);
         }else{
-            console.log("verified\n",req.body)
+            // console.log("verified\n",req.body)
             passport.authenticate("local")(req,res,function(){
-                console.log("user authentiacted");
+                // console.log("user authentiacted");
                 res.redirect("/");
             })
         }

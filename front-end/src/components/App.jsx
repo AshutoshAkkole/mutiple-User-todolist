@@ -37,7 +37,7 @@ function App() {
       <SignIn/>
       <Routes>
         <Route path="/" element={<Login setlogin={setLoggedIn}/>}/>
-        <Route path="/Register" setlogin={setLoggedIn} element={<Register/>}/>
+        <Route path="/Register" element={<Register setlogin={setLoggedIn} />}/>
       </Routes>
       </>
     )
@@ -46,8 +46,8 @@ function App() {
     <>
     <Navbar setlogin={setLoggedIn} />
     <Routes>
-    <Route path="/Home" element={<Home/>}/>
-    <Route path="/Create" element={<Create/>}/>
+    <Route path="/Home" element={<Home setlogin={setLoggedIn} />}/>
+    <Route path="/Create" setlogin={setLoggedIn} element={<Create/>}/>
     </Routes>
     </>
   );

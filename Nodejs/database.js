@@ -4,13 +4,27 @@ const passportLocalMongoose = require("passport-local-mongoose");
 
 mongoose.connect(process.env.URL,{useNewUrlParser:true});
 
-const schema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     username:String,
-    password:String
+    password:String,
+    cardId:[String]
 })
 
-schema.plugin(passportLocalMongoose);
+const cardSchema = new mongoose.Schema({
+    title:String,
+    WhoCreated:String,
+    task:[{
+        data:String,
+        doneStatus:Number,
+        whoUpdatedLast:String,
+        WhoCreated:String,
+    }]
+})
 
-const collection = mongoose.model("user",schema);
+userSchema.plugin(passportLocalMongoose);
 
-module.exports = {mongoose,collection}
+const userCollection = mongoose.model("user",userSchema);
+
+const cardCollection = mongoose.model("card",cardSchema);
+
+module.exports = {mongoose,userCollection,cardCollection};
