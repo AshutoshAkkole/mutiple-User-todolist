@@ -6,6 +6,8 @@ function Cards(object)
     return(
         <div className='cards'>
             <Card/>
+            <Card/>
+            <Card/>
         </div>
     )
 }

@@ -4,7 +4,7 @@ const passportLocalMongoose = require("passport-local-mongoose");
 
 mongoose.connect(process.env.URL,{useNewUrlParser:true});
 
-const schema = mongoose.Schema({
+const schema = new mongoose.Schema({
     username:String,
     password:String
 })
