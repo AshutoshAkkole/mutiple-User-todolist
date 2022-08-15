@@ -12,12 +12,12 @@ const userSchema = new mongoose.Schema({
 
 const cardSchema = new mongoose.Schema({
     title:String,
-    WhoCreated:String,
-    task:[{
+    whoCreated:String,
+    tasks:[{
         data:String,
         doneStatus:Number,
         whoUpdatedLast:String,
-        WhoCreated:String,
+        whoCreated:String,
     }]
 })
 

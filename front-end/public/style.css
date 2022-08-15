@@ -69,6 +69,7 @@ ul {
 
 .card{
   display: inline-block;
+  vertical-align: top;
   margin: 1rem;
   padding: 4px;
   width: 22%;
@@ -83,9 +84,11 @@ ul {
   text-align: center;
   border-bottom: 1px solid;
   word-break: break-all;
+  position: relative;
 }
 .task{
   display: flex;
+  position: relative;
   width: 100%;
   /* background-color: #eee; */
   /* padding-right: 10px; */
@@ -102,6 +105,10 @@ ul {
   margin-left: 10px;
   word-wrap: break-word;
   word-break: break-all
+}
+
+.taskdata:hover + .floating-window{
+  display: block;
 }
 
 .taskcheck{
@@ -260,3 +267,47 @@ background-color: #451d54;
   cursor: pointer;
   box-shadow: 0 0 0 10px black
 }
+
+/* ////////floating window for task//////////// */
+.floating-window p{
+  margin: 0;
+}
+
+.floating-window{
+  position: absolute;
+  top: -24px;
+  left:92px;
+  font-size: 10px;
+  background-color: blue;
+  color: white;
+  padding: 5px;
+  border-radius: 2px;
+  box-shadow: 5px 5px 15px -5px rgb(0 0 0 / 30%);
+  display: none;
+}
+
+/* ////////////floating window for title */
+
+.floating-window2 p{
+  margin: 0;
+}
+
+.floating-window2{
+  position: absolute;
+  top: -20px;
+  left:175px;
+  font-size: 10px;
+  background-color: blue;
+  color: white;
+  padding: 5px;
+  border-radius: 2px;
+  box-shadow: 5px 5px 15px -5px rgb(0 0 0 / 30%);
+  display: none;
+}
+
+.title h2:hover + .floating-window2{
+  display: block;
+}
+
+
+
